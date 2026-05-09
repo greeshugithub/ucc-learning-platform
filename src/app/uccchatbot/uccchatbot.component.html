@@ -1,0 +1,41 @@
+<div class="chat-container">
+
+  <h2>UCC AI Mentor</h2>
+
+  <div class="messages-section">
+
+    <div *ngFor="let message of messages" [ngClass]="message.sender" class="message-box">
+      {{ message.text }}
+    </div>
+
+  </div>
+
+  <div class="input-section">
+
+    <input type="text" [(ngModel)]="userMessage" placeholder="Ask your confusion..." />
+
+    <button (click)="sendMessage()">
+      Send
+    </button>
+
+  </div>
+
+  <div class="login-popup" *ngIf="showLoginPopup">
+
+    <h3>Login Required</h3>
+
+    <p>
+      You reached free question limit.
+      Login to continue your personalized roadmap.
+    </p>
+
+    <button (click)="goToLogin()">
+      Login / Signup
+    </button>
+
+  </div>
+  <!-- <button (click)="goToLogin()">
+  Login / Signup
+</button> -->
+
+</div>

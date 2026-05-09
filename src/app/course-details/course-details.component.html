@@ -1,0 +1,21 @@
+<div class="details-container">
+
+  <h1>{{ courseData?.title }}</h1>
+
+  <p>
+    {{ courseData?.description }}
+  </p>
+
+  <h3>Modules</h3>
+
+  <ul>
+
+    <li *ngFor="let module of courseData?.modules">
+
+      {{ module }}
+
+    </li>
+
+  </ul>
+
+</div>

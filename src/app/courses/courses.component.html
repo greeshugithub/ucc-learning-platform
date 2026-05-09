@@ -1,0 +1,30 @@
+<div class="courses-container">
+
+  <h1>Available Courses</h1>
+
+  <div
+    class="course-card"
+    *ngFor="let course of courses"
+  >
+
+    <h2>{{ course.title }}</h2>
+
+    <p>{{ course.description }}</p>
+
+    <p>
+      Duration:
+      {{ course.duration }}
+    </p>
+
+    <p>
+      Modules:
+      {{ course.modules }}
+    </p>
+
+    <button (click)="openCourse(course.id)">
+      View Details
+    </button>
+
+  </div>
+
+</div>

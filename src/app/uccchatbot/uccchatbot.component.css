@@ -1,0 +1,55 @@
+.chat-container {
+  width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.messages-section {
+  height: 350px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.message-box {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
+
+.user {
+  background-color: #dbeafe;
+  text-align: right;
+}
+
+.bot {
+  background-color: #dcfce7;
+  text-align: left;
+}
+
+.input-section {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.login-popup {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px solid red;
+  border-radius: 10px;
+  background-color: #fff1f2;
+}
