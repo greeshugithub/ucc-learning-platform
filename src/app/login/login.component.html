@@ -1,13 +1,148 @@
-<div class="login-container">
+<div class="login-wrapper">
 
-  <h2>Login</h2>
+  <!-- BACKGROUND GLOW -->
 
-  <input type="email" placeholder="Enter Email">
+  <div class="bg-glow glow1"></div>
+  <div class="bg-glow glow2"></div>
+  <div class="bg-glow glow3"></div>
 
-  <input type="password" placeholder="Enter Password">
+  <!-- LOGIN CARD -->
 
-  <button (click)="goTohome()">
-    Login
-  </button>
+  <div class="login-container">
+
+    <!-- LOGO -->
+
+    <div class="login-logo">
+      🤖
+    </div>
+
+    <!-- TITLE -->
+
+    <h1 class="login-title">
+      Welcome Back
+    </h1>
+
+    <p class="login-subtitle">
+      Continue your AI-powered learning journey
+    </p>
+
+    <!-- INPUTS -->
+
+    <!-- <div class="input-group">
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        placeholder="Enter your email"
+        autocomplete="new-email"
+      />
+
+    </div> -->
+
+    <!-- <div class="input-group">
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        placeholder="Enter your password"
+        autocomplete="new-email"
+      />
+
+    </div> -->
+<div class="input-group">
+  <label>Email</label>
+  <input
+    type="email"
+    placeholder="Enter your email"
+    autocomplete="off"
+    readonly
+    onfocus="this.removeAttribute('readonly');"
+  />
+</div>
+
+<div class="input-group">
+  <label>Password</label>
+  <input
+    type="password"
+    placeholder="Enter your password"
+    autocomplete="off"
+    readonly
+    onfocus="this.removeAttribute('readonly');"
+  />
+</div>
+
+    <!-- OPTIONS -->
+
+    <div class="login-options">
+
+      <div class="remember-me">
+
+        <input type="checkbox">
+
+        <span>
+          Remember me
+        </span>
+
+      </div>
+
+      <a href="#">
+        Forgot Password?
+      </a>
+
+    </div>
+
+    <!-- BUTTON -->
+
+    <button
+      class="login-btn"
+      (click)="goTohome()">
+
+      Login 🚀
+
+    </button>
+
+    <!-- DIVIDER -->
+
+    <div class="divider">
+
+      <span>
+        OR
+      </span>
+
+    </div>
+
+    <!-- SOCIAL LOGIN -->
+
+    <div class="social-login">
+
+      <button class="social-btn">
+        🔵 Google
+      </button>
+
+      <button class="social-btn">
+        🟣 GitHub
+      </button>
+
+    </div>
+
+    <!-- SIGNUP -->
+
+    <div class="signup-text">
+
+      Don’t have an account?
+
+      <span>
+        Signup
+      </span>
+
+    </div>
+
+  </div>
 
 </div>

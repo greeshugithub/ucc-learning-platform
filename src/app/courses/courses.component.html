@@ -1,29 +1,137 @@
-<div class="courses-container">
+<div class="courses-wrapper">
 
-  <h1>Available Courses</h1>
+  <!-- BACKGROUND GLOW -->
 
-  <div
-    class="course-card"
-    *ngFor="let course of courses"
-  >
+  <div class="bg-glow glow1"></div>
+  <div class="bg-glow glow2"></div>
+  <div class="bg-glow glow3"></div>
 
-    <h2>{{ course.title }}</h2>
+  <!-- HEADER -->
 
-    <p>{{ course.description }}</p>
+  <div class="courses-header">
 
-    <p>
-      Duration:
-      {{ course.duration }}
-    </p>
+    <div>
 
-    <p>
-      Modules:
-      {{ course.modules }}
-    </p>
+      <h1 class="main-title">
+        Explore Courses 🚀
+      </h1>
 
-    <button (click)="openCourse(course.id)">
-      View Details
+      <p class="sub-title">
+        Learn technologies with AI-guided mentorship
+      </p>
+
+    </div>
+
+    <button class="dashboard-btn">
+      Dashboard
     </button>
+
+  </div>
+
+  <!-- SEARCH BAR -->
+
+  <div class="search-section">
+
+    <input
+      type="text"
+      placeholder="Search technologies..."
+    />
+
+  </div>
+
+  <!-- COURSES GRID -->
+
+  <div class="courses-grid">
+
+    <div
+      class="course-card"
+      *ngFor="let course of courses">
+
+      <!-- TOP -->
+
+      <div class="course-top">
+
+        <div class="course-icon">
+          🚀
+        </div>
+
+        <div class="course-badge">
+          Trending
+        </div>
+
+      </div>
+
+      <!-- TITLE -->
+
+      <h2>
+        {{ course.title }}
+      </h2>
+
+      <!-- DESCRIPTION -->
+
+      <p class="course-description">
+        {{ course.description }}
+      </p>
+
+      <!-- DETAILS -->
+
+      <div class="course-details">
+
+        <div class="detail-box">
+
+          <span>
+            ⏳ Duration
+          </span>
+
+          <h4>
+            {{ course.duration }}
+          </h4>
+
+        </div>
+
+        <div class="detail-box">
+
+          <span>
+            📚 Modules
+          </span>
+
+          <h4>
+            {{ course.modules }}
+          </h4>
+
+        </div>
+
+      </div>
+
+      <!-- TAGS -->
+
+      <div class="tags">
+
+        <span>
+          AI
+        </span>
+
+        <span>
+          Projects
+        </span>
+
+        <span>
+          Mentorship
+        </span>
+
+      </div>
+
+      <!-- BUTTON -->
+
+      <button
+        class="view-btn"
+        (click)="openCourse(course.id)">
+
+        View Details →
+
+      </button>
+
+    </div>
 
   </div>
 

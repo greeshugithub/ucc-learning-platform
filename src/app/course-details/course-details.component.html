@@ -1,21 +1,176 @@
-<div class="details-container">
+<div class="details-wrapper">
 
-  <h1>{{ courseData?.title }}</h1>
+  <!-- BACKGROUND GLOW -->
 
-  <p>
-    {{ courseData?.description }}
-  </p>
+  <div class="bg-glow glow1"></div>
+  <div class="bg-glow glow2"></div>
+  <div class="bg-glow glow3"></div>
 
-  <h3>Modules</h3>
+  <!-- TOP BAR -->
 
-  <ul>
+  <div class="top-bar">
 
-    <li *ngFor="let module of courseData?.modules">
+    <div class="logo-section">
 
-      {{ module }}
+      <div class="logo-box">
+        🚀
+      </div>
 
-    </li>
+      <div>
 
-  </ul>
+        <h2 class="logo-title">
+          UCC AI Learning
+        </h2>
+
+        <p class="logo-subtitle">
+          Personalized AI Mentorship
+        </p>
+
+      </div>
+
+    </div>
+
+    <button class="back-btn">
+      ← Back
+    </button>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+
+  <div class="details-container">
+
+    <!-- LEFT -->
+
+    <div class="course-left">
+
+      <!-- BADGE -->
+
+      <div class="course-badge">
+        Trending Technology
+      </div>
+
+      <!-- TITLE -->
+
+      <h1>
+        {{ courseData?.title }}
+      </h1>
+
+      <!-- DESCRIPTION -->
+
+      <p class="course-description">
+
+        {{ courseData?.description }}
+
+      </p>
+
+      <!-- STATS -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+
+          <span>
+            ⏳ Duration
+          </span>
+
+          <h3>
+            3 Months
+          </h3>
+
+        </div>
+
+        <div class="stat-card">
+
+          <span>
+            📚 Modules
+          </span>
+
+          <h3>
+            {{ courseData?.modules?.length }}
+          </h3>
+
+        </div>
+
+        <div class="stat-card">
+
+          <span>
+            🚀 Projects
+          </span>
+
+          <h3>
+            5+
+          </h3>
+
+        </div>
+
+      </div>
+
+      <!-- BUTTONS -->
+
+      <div class="action-buttons">
+
+        <button
+  class="enroll-btn"
+  (click)="startLearning()">
+
+  Start Learning 🚀
+
+</button>
+
+<button
+  class="preview-btn"
+  (click)="watchPreview()">
+
+  Watch Preview ▶
+
+</button>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="course-right">
+
+      <div class="modules-card">
+
+        <h2>
+          Course Modules 📚
+        </h2>
+
+        <!-- MODULES -->
+
+        <div
+          class="module-item"
+          *ngFor="let module of courseData?.modules; let i = index">
+
+          <div class="module-number">
+
+            {{ i + 1 }}
+
+          </div>
+
+          <div class="module-content">
+
+            <h4>
+
+              {{ module }}
+
+            </h4>
+
+            <p>
+              Practical learning with AI guidance
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>

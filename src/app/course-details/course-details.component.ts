@@ -70,6 +70,22 @@ this.courseData = this.allCourses.find(
 
   }
 
+startLearning() {
 
+  window.open(
+    '/assets/uccvideo.mp4.mp4',
+    '_blank'
+  );
+
+}
+
+watchPreview() {
+
+  window.open(
+    '/assets/uccvideo.mp4.mp4',
+    '_blank'
+  );
+
+}
 
 }

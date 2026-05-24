@@ -1,43 +1,203 @@
-<div class="chat-container">
+<div class="main-wrapper">
 
-  <h2>UCC AI Mentorr</h2>
+  <!-- BACKGROUND GLOW -->
 
-  <div class="messages-section">
+  <div class="bg-glow glow1"></div>
+  <div class="bg-glow glow2"></div>
+  <div class="bg-glow glow3"></div>
 
-    <div *ngFor="let message of messages" [ngClass]="message.sender" class="message-box">
-      {{ message.text }}
+  <!-- CHAT CONTAINER -->
+
+  <div class="chat-container">
+
+    <!-- HEADER -->
+
+    <div class="chat-header">
+
+      <div class="logo-section">
+
+        <div class="bot-logo">
+          🤖
+        </div>
+
+        <div>
+
+          <h1 class="main-title">
+            UCC AI Mentor
+          </h1>
+
+          <p class="sub-title">
+            Always ready to help
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="header-actions">
+
+        <button class="header-btn">
+          🔍
+        </button>
+
+        <button class="header-btn">
+          ⋯
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- CHAT BODY -->
+
+    <div class="chat-body">
+
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="message.sender"
+        class="message-row">
+
+        <!-- BOT AVATAR -->
+
+        <div
+          class="avatar"
+          *ngIf="message.sender === 'bot'">
+
+          🤖
+
+        </div>
+
+        <!-- MESSAGE -->
+
+        <div class="message-box">
+
+          {{ message.text }}
+
+        </div>
+
+      </div>
+
+      <!-- SUGGESTIONS -->
+
+      <div class="suggestion-container">
+
+        <button class="suggestion-btn">
+          ⚡ What is Angular?
+        </button>
+
+        <button class="suggestion-btn">
+          🔥 React Hooks
+        </button>
+
+        <button class="suggestion-btn">
+          🌐 REST API
+        </button>
+
+        <button class="suggestion-btn">
+          🟩 Node.js
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- INPUT -->
+
+    <div class="input-wrapper">
+
+      <div class="input-section">
+
+        <input
+          type="text"
+          [(ngModel)]="userMessage"
+          placeholder="Ask your confusion..."
+          (keyup.enter)="sendMessage()"
+        />
+
+        <button
+          class="send-btn"
+          (click)="sendMessage()">
+
+          🚀
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- POPUP -->
+
+    <div
+      class="login-popup"
+      *ngIf="showLoginPopup">
+
+      <div class="popup-card">
+
+        <!-- ICON -->
+
+        <div class="popup-icon">
+          🚀
+        </div>
+
+        <!-- TITLE -->
+
+        <h2>
+          Continue Your Journey
+        </h2>
+
+        <!-- TEXT -->
+
+        <p>
+
+          You completed your AI mentoring session.
+          Continue learning with UCC.
+
+        </p>
+
+        <!-- BUTTONS -->
+
+        <div class="popup-buttons">
+
+          <!-- BEFORE LOGIN -->
+
+          <button
+            *ngIf="!isLoggedIn"
+            class="popup-btn primary-btn"
+            (click)="continueChat()">
+
+            💬 Continue Chat
+
+          </button>
+
+          <!-- AFTER LOGIN -->
+
+          <div *ngIf="isLoggedIn">
+
+            <button
+              class="popup-btn secondary-btn"
+              (click)="goToCourses()">
+
+              🚀 Explore Courses
+
+            </button>
+
+            <button
+              class="popup-btn logout-btn"
+              (click)="logout()">
+
+              ❌ Logout
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
-
-
-  
-  <div class="input-section">
-
-    <input type="text" [(ngModel)]="userMessage" placeholder="Ask your confusion..." />
-
-    <button (click)="sendMessage()">
-      Send
-    </button>
-
-  </div>
-
-  <div class="login-popup" *ngIf="showLoginPopup">
-
-    <h3>Login Required</h3>
-
-    <p>
-      You reached free question limit.
-      Login to continue your personalized roadmap.
-    </p>
-
-    <button (click)="goToLogin()">
-      Login / Signup
-    </button>
-
-  </div>
-  <!-- <button (click)="goToLogin()">
-  Login / Signup
-</button> -->
 
 </div>

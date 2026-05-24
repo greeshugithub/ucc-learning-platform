@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-uccchatbot',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './uccchatbot.component.html',
   styleUrl: './uccchatbot.component.css'
 })
 
 export class UccchatbotComponent {
-   userMessage: string = '';
+
+  userMessage: string = '';
 
   questionCount: number = 0;
 
   showLoginPopup: boolean = false;
+
+  isLoggedIn: boolean = false;
 
   messages: any[] = [
     {
@@ -25,7 +28,89 @@ export class UccchatbotComponent {
       text: 'Hi 👋 I am UCC AI Mentor. Tell me what confuses you?'
     }
   ];
-constructor(private router: Router) {}
+
+  constructor(
+    private router: Router,
+    private http: HttpClient
+  ) {}
+
+  ngOnInit() {
+
+    if (typeof window !== 'undefined') {
+
+      /* LOGIN STATUS */
+
+      const loggedIn =
+        localStorage.getItem('uccLoggedIn');
+
+      if (loggedIn === 'true') {
+
+        this.isLoggedIn = true;
+
+      }
+this.showLoginPopup = false;
+      /* OLD CHAT */
+
+      const savedMessages =
+        localStorage.getItem('uccMessages');
+
+      if (savedMessages) {
+
+        this.messages =
+          JSON.parse(savedMessages);
+
+      }
+
+      /* QUESTION COUNT */
+
+      const savedCount =
+        localStorage.getItem('uccQuestionCount');
+
+      if (savedCount) {
+
+        this.questionCount =
+          Number(savedCount);
+
+      }
+
+      /* SHOW POPUP AFTER LOGIN */
+
+      if (
+        this.isLoggedIn &&
+        this.questionCount >= 5
+      ) 
+      {
+
+        this.showLoginPopup = true;
+
+      }
+
+    }
+
+  }
+
+  /* SAVE CHAT */
+
+  saveChatData() {
+
+    if (typeof window !== 'undefined') {
+
+      localStorage.setItem(
+        'uccMessages',
+        JSON.stringify(this.messages)
+      );
+
+      localStorage.setItem(
+        'uccQuestionCount',
+        this.questionCount.toString()
+      );
+
+    }
+
+  }
+
+  /* SEND MESSAGE */
+
   sendMessage() {
 
     if (!this.userMessage.trim()) {
@@ -37,55 +122,116 @@ constructor(private router: Router) {}
       text: this.userMessage
     });
 
-    let botReply = this.generateReply(this.userMessage);
+    const currentQuestion =
+      this.userMessage;
 
-    this.messages.push({
-      sender: 'bot',
-      text: botReply
+    this.userMessage = '';
+
+    this.http.get<any>(
+      `http://127.0.0.1:5000/chatbot/${currentQuestion}`
+    )
+    .subscribe((response) => {
+
+      this.messages.push({
+        sender: 'bot',
+        text: response.answer
+      });
+
+      this.saveChatData();
+
     });
 
     this.questionCount++;
 
-    if (this.questionCount >= 5) {
-      this.showLoginPopup = true;
+    this.saveChatData();
+
+    /* BEFORE LOGIN */
+
+    if (
+      this.questionCount >= 5 &&
+      !this.isLoggedIn
+    ) {
+
+      setTimeout(() => {
+
+        this.showLoginPopup = true;
+
+      }, 1200);
+
     }
 
-    this.userMessage = '';
+    /* AFTER LOGIN */
+
+    if (
+      this.questionCount >= 10 &&
+      this.isLoggedIn
+    ) {
+
+      setTimeout(() => {
+
+        this.showLoginPopup = true;
+
+      }, 1200);
+
+    }
+
   }
 
-  generateReply(message: string): string {
+  /* CONTINUE CHAT */
 
-    const lowerMessage = message.toLowerCase();
+  continueChat() {
 
-    if (
-      lowerMessage.includes('ui') ||
-      lowerMessage.includes('design') ||
-      lowerMessage.includes('frontend')
-    ) {
-      return 'You may enjoy Frontend Development using Angular.';
-    }
+    this.showLoginPopup = false;
 
-    if (
-      lowerMessage.includes('logic') ||
-      lowerMessage.includes('backend') ||
-      lowerMessage.includes('api')
-    ) {
-      return 'Backend development may suit your thinking style.';
-    }
+    this.router.navigate(['/login']);
 
-    if (
-      lowerMessage.includes('cloud') ||
-      lowerMessage.includes('deployment') ||
-      lowerMessage.includes('devops')
-    ) {
-      return 'DevOps and Cloud Engineering may be a good path for you.';
-    }
-
-    return 'Tell me more about your interests so I can guide you better.';
   }
 
-goToLogin() {
-  this.router.navigate(['/login']);
-}
+  /* COURSES */
+
+  goToCourses() {
+
+    this.showLoginPopup = false;
+
+    this.router.navigate(['/course']);
+
+  }
+
+  /* LOGOUT */
+
+  logout() {
+
+    if (typeof window !== 'undefined') {
+
+      localStorage.removeItem(
+        'uccLoggedIn'
+      );
+
+      localStorage.removeItem(
+        'uccMessages'
+      );
+
+      localStorage.removeItem(
+        'uccQuestionCount'
+      );
+
+    }
+
+    this.isLoggedIn = false;
+
+    this.questionCount = 0;
+
+    this.showLoginPopup = false;
+
+    this.messages = [
+      {
+        sender: 'bot',
+        text: 'Hi 👋 I am UCC AI Mentor. Tell me what confuses you?'
+      }
+    ];
+
+    this.router.navigate(['/login']);
+
+  }
 
 }
